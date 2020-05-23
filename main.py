@@ -23,7 +23,12 @@ distance_from_picture_side_percent = 5
 distance_from_bottom = int(img_height * distance_from_picture_side_percent / 100)
 distance_from_side = int(img_width * distance_from_picture_side_percent / 100)
 
-roi = img[distance_from_bottom:logo_height + distance_from_bottom, distance_from_side:logo_width + distance_from_side]
+logo_starting_height = img_height - logo_height - distance_from_bottom
+logo_starting_width = distance_from_side
+logo_ending_height = img_height - distance_from_bottom
+logo_ending_width = logo_width + distance_from_side
+
+roi = img[logo_starting_height: logo_ending_height, logo_starting_width: logo_ending_width]
 
 # Now create a mask of logo and create its inverse mask also
 logo_gray = cv2.cvtColor(logo,cv2.COLOR_BGR2GRAY)
@@ -38,7 +43,7 @@ logo_fg = cv2.bitwise_and(logo,logo,mask=mask)
 
 # Put logo in ROI and modify the main image
 dst = cv2.add(img_bg,logo_fg)
-img[distance_from_bottom:logo_height + distance_from_bottom, distance_from_side:logo_width + distance_from_side] = dst
+img[logo_starting_height: logo_ending_height, logo_starting_width: logo_ending_width] = dst
 
 cv2.imshow('res',img)
 cv2.waitKey(0)
