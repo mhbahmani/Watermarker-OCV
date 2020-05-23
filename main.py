@@ -1,8 +1,32 @@
 import cv2
+import sys, getopt
+
+args = sys.argv[1:]
+image_file_path = logo_file_path = None
+try:
+	opts, args = getopt.getopt(args,"hi:l:",["image=","logo="])
+except getopt.GetoptError:
+	print('main.py -i <image> -l <logo>')
+	sys.exit(2)
+for opt, arg in opts:
+	if opt == '-h':
+		print('main.py -i <image> -l <logo>')
+		sys.exit()
+	elif opt in ("-i", "--image"):
+		image_file_path = arg
+	elif opt in ("-l", "--logo"):
+		logo_file_path = arg
+
+if image_file_path is None:
+	print('You didn\'t give image file path. I take it as image.jpg')
+	image_file_path = "image.jpg"
+if logo_file_path is None:
+	print('You didn\'t give logo file path. I take it as watermark.png')
+	logo_file_path = "logo.png"
 
 # Load two images
-img = cv2.imread('i.jpg')
-logo = cv2.imread('watermark.png')
+img = cv2.imread(image_file_path)
+logo = cv2.imread(logo_file_path)
 
 img_height, img_width, channels = img.shape
 
