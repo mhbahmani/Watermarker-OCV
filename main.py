@@ -9,12 +9,32 @@ image_file_path = logo_file_path = None
 bottom = True
 left = True
 
+# percent of original size
+height_scale_percent = 6 
+
 # Pars arguments
 try:
-	opts, args = getopt.getopt(args,"hi:l:",["image=","logo="])
+	opts, args = getopt.getopt(args,"hi:l:p:",["image=", "logo=", "percents="])
 except getopt.GetoptError:
-	print('main.py -i <image> -l <logo>')
+	print('Use `python main.py -h` to see how this code has to used.')
 	sys.exit(2)
+
+for opt, arg in opts:
+	if opt == '-h':
+		print('$main.py -i <image path> -l <watermark path> -p <watermark scale percents> [watermark place]')
+		print('If you don\'t gave image path and watermark, script consume them by default as image.jpg and watermark.png')
+		print('With -p option, declare logo should be how many percents of the main image')
+		print('By defalt, this value is 6%')
+		print('Use top, bottom, left and right key words to declare watermark place')
+		print('Watermark palce is by default bottom and left')
+		sys.exit()
+	elif opt in ("-i", "--image"):
+		image_file_path = arg
+	elif opt in ("-l", "--logo"):
+		logo_file_path = arg
+	elif opt in ("-p", "--percents"):
+		height_scale_percent = int(arg)
+
 for arg in args:
 	if arg == 'right':
 		left = False
@@ -30,15 +50,6 @@ for arg in args:
 		elif image_file_type == 'logo':
 			logo_file_path = path
 
-for opt, arg in opts:
-	if opt == '-h':
-		print('main.py -i <image> -l <logo> [watermark place]')
-		sys.exit()
-	elif opt in ("-i", "--image"):
-		image_file_path = arg
-	elif opt in ("-l", "--logo"):
-		logo_file_path = arg
-
 if image_file_path is None or image_file_path is '':
 	print('You didn\'t give image file path. I consume it as image.jpg')
 	image_file_path = "image.jpg"
@@ -50,7 +61,8 @@ print('Details you gave me:')
 print('Main Image: %s' % image_file_path)
 print('Watermark: %s' % logo_file_path)
 print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
-print('----------------------')
+print('----------------------------------------------------------')
+print('Adding watermark to image...') 
 
 # Load image and watermark
 img = cv2.imread(image_file_path)
@@ -60,7 +72,6 @@ img_height, img_width, channels = img.shape
 
 logo_height, logo_width, channels = logo.shape
 
-height_scale_percent = 6 # percent of original size
 width_scale_percent = (height_scale_percent * img_height * logo_width) / (img_width * logo_height)
 
 # Calculate new width and height of logo
