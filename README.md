@@ -14,7 +14,8 @@ Just run install.sh file directly with one of these two commands:
 Make sure you have python3 using `python3 --version`
 - We need pip and virtualenv. So, if you don't have these, install them.
   - pip:
-    - MacOS and Linux: `python3 -m pip install --user --upgrade pip`
+    - MacOS and Linux: 
+      - `python3 -m pip install --user --upgrade pip`
     - Windows: The Python installers for Windows include pip. You can make sure it's up-to-date:
       - `py -m pip install --upgrade pip`
   - virtualenv:
@@ -23,11 +24,14 @@ Make sure you have python3 using `python3 --version`
 
 - Clone the repository
   - `git clone https://github.com/mhbahmani/Watermark-Adder`
+
 - Now we have to create a virtual environment with python3:
-  - `virtualenv -p python3 venv`
+  - MacOS and Linux: `virtualenv -p python3 venv`
+  - Windows: `py -m venv venv`
+
 - Then, we should activate it:
   - MacOs and Linux: `source venv/bin/activate`
-  - Windows: `.\env\Scripts\activate`
+  - Windows: `.\venv\Scripts\activate`
 
 - Install requiered packages:
   - `pip install -r requirements.txt`
@@ -35,9 +39,16 @@ Make sure you have python3 using `python3 --version`
 **Done. It's ready to use!**
 
 ## How to use
-- First, activate created virtualenv and then run main.py script:
+- Go to script directory in terminal or command prompt.
+
+- Activate created virtualenv:
+  * MacOs and Linux: `source venv/bin/activate`
+  * Windows: `.\env\Scripts\activate`
+ 
+- Then run main.py script:
   * `python main.py`
-- You can add these arguments and options to this command:
+
+- You can also add these arguments and options to this command:
 
 | **Options**                       | **Description**                                       |
 |:----------------------------------|:------------------------------------------------------|
