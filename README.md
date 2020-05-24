@@ -5,10 +5,13 @@
 ## Installation
 ***1- Automatic:***
 Just run install.sh file directly with one of these two commands:
-   - using wget:
-     * `bash -c "$(wget -q -O- https://raw.githubusercontent.com/mhbahmani/Watermark-Adder/master/linux_install.sh)"`
-   - using curl:
-     * `bash -c "$(curl -L -fsS -r 5 https://raw.githubusercontent.com/mhbahmani/Watermark-Adder/master/linux_install.sh)"`
+- MacOS and Linux:
+  - using wget:
+    * `bash -c "$(wget -q -O- https://raw.githubusercontent.com/mhbahmani/Watermark-Adder/master/linux_install.sh)"`
+  - using curl:
+    * `bash -c "$(curl -L -fsS -r 5 https://raw.githubusercontent.com/mhbahmani/Watermark-Adder/master/linux_install.sh)"`
+- Windows:
+  - Wait for it :)
 
 ***2- Manual:***
 Make sure you have python3 using `python3 --version`
