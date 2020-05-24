@@ -4,12 +4,24 @@ import re
 
 args = sys.argv[1:]
 image_file_path = logo_file_path = None
+
+# Set default logo place, which is bottom left
+bottom = True
+left = True
+
+# Pars arguments
 try:
 	opts, args = getopt.getopt(args,"hi:l:",["image=","logo="])
 except getopt.GetoptError:
 	print('main.py -i <image> -l <logo>')
 	sys.exit(2)
 for arg in args:
+	if arg == 'right':
+		left = False
+		continue
+	elif arg == 'top':
+		bottom = False
+		continue
 	arg = re.split("=", arg)
 	print(arg)
 	if len(arg) == 2:
@@ -34,6 +46,7 @@ if image_file_path is None or image_file_path is '':
 if logo_file_path is None or logo_file_path is '':
 	print('You didn\'t give logo file path. I consume it as watermark.png')
 	logo_file_path = "watermark.png"
+
 
 # Load two images
 img = cv2.imread(image_file_path)
