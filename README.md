@@ -12,15 +12,9 @@ Just run install.sh file directly with one of these two commands:
 
 ***2- Manual:***
 Make sure you have python3 using `python3 --version`
-- We need pip and virtualenv. So, if you don't have these, install them.
-  - pip:
-    - MacOS and Linux: 
-      - `python3 -m pip install --user --upgrade pip`
-    - Windows: The Python installers for Windows include pip. You can make sure it's up-to-date:
-      - `py -m pip install --upgrade pip`
-  - virtualenv:
-    - MacOS and Linux: `python3 -m pip install --user virtualenv`
-    - Windows: `py -m pip install --user virtualenv`
+- We need virtualenv. So, if you don't have, install it.
+  - MacOS and Linux: `python3 -m pip install --user virtualenv`
+  - Windows: `py -m pip install --user virtualenv`
 
 - Clone the repository
   - `git clone https://github.com/mhbahmani/Watermark-Adder`
