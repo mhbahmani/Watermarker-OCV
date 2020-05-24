@@ -47,6 +47,10 @@ if logo_file_path is None or logo_file_path is '':
 	print('You didn\'t give logo file path. I consume it as watermark.png')
 	logo_file_path = "watermark.png"
 
+print('Details you gave me:')
+print('Main image: %s', $image_file_path)
+print('Watermark: %s', $logo_file_path)
+print('Watermark location: %s' ,$bottom:'bottom'?'top')
 
 # Load two images
 img = cv2.imread(image_file_path)
