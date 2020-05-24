@@ -52,7 +52,7 @@ print('Watermark: %s' % logo_file_path)
 print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
 print('----------------------')
 
-# Load two images
+# Load image and watermark
 img = cv2.imread(image_file_path)
 logo = cv2.imread(logo_file_path)
 
@@ -63,10 +63,10 @@ logo_height, logo_width, channels = logo.shape
 height_scale_percent = 6 # percent of original size
 width_scale_percent = (height_scale_percent * img_height * logo_width) / (img_width * logo_height)
 
-#calculate new width and height of logo
+# Calculate new width and height of logo
 logo_width = int(img_width * width_scale_percent  / 100)
 logo_height = int(img_height * height_scale_percent / 100)
-# resize image
+# Resize image
 logo = cv2.resize(logo, (logo_width, logo_height), interpolation = cv2.INTER_AREA)
  
 # I want to put logo on top-left corner, So I create a ROI
@@ -75,10 +75,20 @@ distance_from_picture_side_percent = 5
 distance_from_bottom = int(img_height * distance_from_picture_side_percent / 100)
 distance_from_side = int(img_width * distance_from_picture_side_percent / 100)
 
-logo_starting_height = img_height - logo_height - distance_from_bottom
-logo_starting_width = distance_from_side
-logo_ending_height = img_height - distance_from_bottom
-logo_ending_width = logo_width + distance_from_side
+# Set logo coordinates
+if bottom:
+	logo_starting_height = img_height - logo_height - distance_from_bottom
+	logo_ending_height = img_height - distance_from_bottom
+else:	
+	logo_starting_height = distance_from_bottom
+	logo_ending_height = logo_height + distance_from_bottom
+
+if left:
+	logo_starting_width = distance_from_side
+	logo_ending_width = logo_width + distance_from_side
+else:
+	logo_starting_width = img_width - logo_width - distance_from_side
+	logo_ending_width = img_width - distance_from_side
 
 roi = img[logo_starting_height: logo_ending_height, logo_starting_width: logo_ending_width]
 
