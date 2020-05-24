@@ -23,7 +23,6 @@ for arg in args:
 		bottom = False
 		continue
 	arg = re.split("=", arg)
-	print(arg)
 	if len(arg) == 2:
 		image_file_type, path = arg 
 		if image_file_type == 'image':
@@ -48,9 +47,10 @@ if logo_file_path is None or logo_file_path is '':
 	logo_file_path = "watermark.png"
 
 print('Details you gave me:')
-print('Main image: %s', $image_file_path)
-print('Watermark: %s', $logo_file_path)
-print('Watermark location: %s' ,$bottom:'bottom'?'top')
+print('Main Image: %s' % image_file_path)
+print('Watermark: %s' % logo_file_path)
+print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
+print('----------------------')
 
 # Load two images
 img = cv2.imread(image_file_path)
