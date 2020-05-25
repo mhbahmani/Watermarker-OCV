@@ -14,48 +14,50 @@ height_scale_percent = 6
 
 # Pars arguments
 try:
-	opts, args = getopt.getopt(args,"hi:l:p:",["image=", "logo=", "percents="])
+    opts, args = getopt.getopt(args,"hi:l:p:",["image=", "logo=", "percents="])
 except getopt.GetoptError:
-	print('Use `python main.py -h` to see how this code has to used.')
-	sys.exit(2)
+    print('Use `python main.py -h` to see how this code has to used.')
+    sys.exit(2)
 
 for opt, arg in opts:
-	if opt == '-h':
-		print('$main.py -i <image path> -l <watermark path> -p <watermark scale percents> [watermark place]')
-		print('If you don\'t gave image path and watermark, script consume them by default as image.jpg and watermark.png')
-		print('With -p option, declare logo should be how many percents of the main image')
-		print('By defalt, this value is 6%')
-		print('Use top, bottom, left and right key words to declare watermark place')
-		print('Watermark palce is by default bottom and left')
-		sys.exit()
-	elif opt in ("-i", "--image"):
-		image_file_path = arg
-	elif opt in ("-l", "--logo"):
-		logo_file_path = arg
-	elif opt in ("-p", "--percents"):
-		height_scale_percent = int(arg)
+    if opt == '-h':
+        print('$main.py -i <image path> -l <watermark path> -p <watermark scale percents> [watermark place]')
+        print('If you don\'t gave image path and watermark, script consume them by default as image.jpg and watermark.png')
+        print('With -p option, declare logo should be how many percents of the main image')
+        print('By defalt, this value is 6%')
+        print('Use top, bottom, left and right key words to declare watermark place')
+        print('Watermark palce is by default bottom and left')
+        sys.exit()
+    elif opt in ("-i", "--image"):
+        image_file_path = arg
+    elif opt in ("-l", "--logo"):
+        logo_file_path = arg
+    elif opt in ("-p", "--percents"):
+        height_scale_percent = int(arg)
 
 for arg in args:
-	if arg == 'right':
-		left = False
-		continue
-	elif arg == 'top':
-		bottom = False
-		continue
-	arg = re.split("=", arg)
-	if len(arg) == 2:
-		image_file_type, path = arg 
-		if image_file_type == 'image':
-			image_file_path = path
-		elif image_file_type == 'logo':
-			logo_file_path = path
+    if arg == 'right':
+        left = False
+        continue
+    elif arg == 'top':
+        bottom = False
+        continue
+
+    arg = re.split("=", arg)
+    if len(arg) == 2:
+        image_file_type, path = arg 
+        if image_file_type == 'image':
+            image_file_path = path
+        elif image_file_type == 'logo':
+            logo_file_path = path
 
 if image_file_path is None or image_file_path is '':
-	print('You didn\'t give image file path. I consume it as image.jpg')
-	image_file_path = "image.jpg"
+    print('You didn\'t give image file path. I consume it as image.jpg')
+    image_file_path = "image.jpg"
+
 if logo_file_path is None or logo_file_path is '':
-	print('You didn\'t give logo file path. I consume it as watermark.png')
-	logo_file_path = "watermark.png"
+    print('You didn\'t give logo file path. I consume it as watermark.png')
+    logo_file_path = "watermark.png"
 
 print('Details you gave me:')
 print('Main Image: %s' % image_file_path)
@@ -88,18 +90,18 @@ distance_from_side = int(img_width * distance_from_picture_side_percent / 100)
 
 # Set logo coordinates
 if bottom:
-	logo_starting_height = img_height - logo_height - distance_from_bottom
-	logo_ending_height = img_height - distance_from_bottom
+    logo_starting_height = img_height - logo_height - distance_from_bottom
+    logo_ending_height = img_height - distance_from_bottom
 else:	
-	logo_starting_height = distance_from_bottom
-	logo_ending_height = logo_height + distance_from_bottom
+    logo_starting_height = distance_from_bottom
+    logo_ending_height = logo_height + distance_from_bottom
 
 if left:
-	logo_starting_width = distance_from_side
-	logo_ending_width = logo_width + distance_from_side
+    logo_starting_width = distance_from_side
+    logo_ending_width = logo_width + distance_from_side
 else:
-	logo_starting_width = img_width - logo_width - distance_from_side
-	logo_ending_width = img_width - distance_from_side
+    logo_starting_width = img_width - logo_width - distance_from_side
+    logo_ending_width = img_width - distance_from_side
 
 roi = img[logo_starting_height: logo_ending_height, logo_starting_width: logo_ending_width]
 
