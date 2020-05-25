@@ -45,7 +45,7 @@ for arg in args:
 
     arg = re.split("=", arg)
     if len(arg) == 2:
-        image_file_type, path = arg 
+        image_file_type, path = arg
         if image_file_type == 'image':
             image_file_path = path
         elif image_file_type == 'logo':
@@ -64,7 +64,7 @@ print('Main Image: %s' % image_file_path)
 print('Watermark: %s' % logo_file_path)
 print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
 print('----------------------------------------------------------')
-print('Adding watermark to image...') 
+print('Adding watermark to image...')
 
 # Load image and watermark
 img = cv2.imread(image_file_path)
@@ -81,7 +81,7 @@ logo_width = int(img_width * width_scale_percent  / 100)
 logo_height = int(img_height * height_scale_percent / 100)
 # Resize image
 logo = cv2.resize(logo, (logo_width, logo_height), interpolation = cv2.INTER_AREA)
- 
+
 # I want to put logo on top-left corner, So I create a ROI
 distance_from_picture_side_percent = 5
 
@@ -92,7 +92,7 @@ distance_from_side = int(img_width * distance_from_picture_side_percent / 100)
 if bottom:
     logo_starting_height = img_height - logo_height - distance_from_bottom
     logo_ending_height = img_height - distance_from_bottom
-else:	
+else:
     logo_starting_height = distance_from_bottom
     logo_ending_height = logo_height + distance_from_bottom
 
