@@ -40,7 +40,7 @@ Make sure you have python3 using `python3 --version`
 
 - Activate created virtualenv:
   * MacOs and Linux: `source venv/bin/activate`
-  * Windows: `.\env\Scripts\activate`
+  * Windows: `.\venv\Scripts\activate`
  
 - Then run main.py script:
   * `python main.py`
@@ -51,12 +51,14 @@ Make sure you have python3 using `python3 --version`
 |:----------------------------------|:------------------------------------------------------|
 |`-i <main image file path>`        | Script looks for image in given path                  |
 |`-l <watermark file path>`         | Script looks for watermark in given path              |
+|`-p <watermark scale percents>`    | Declare watermark should be how many percents of image|
 
 *Default path for image and watermark is beside of script and names image.jpg and watermark.png*
+*Default value for watermark scale percents is 6*
 
 | **Arguments**                     | **Description**                                       |
 |:----------------------------------|:------------------------------------------------------|
-|`[watermark coordiantes]`          | You can use `top`, `bottom`, `right` and `left` to set specified place for watermark                                                               |
+|`[watermark coordiantes]`          | You can use `top`, `bottom`, `right` and `left` to set specified place for watermark |
 
 *Default place for watermark is bottom left*
 
