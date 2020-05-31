@@ -90,14 +90,17 @@ Make sure you have python3 using `python3 --version`
 
 - You can add these arguments and options to this command:
 
-| **Options**                       | **Description**                                       |
-|:----------------------------------|:------------------------------------------------------|
-|`-i <main image file path>`        | Script looks for image in given path                  |
-|`-l <watermark file path>`         | Script looks for watermark in given path              |
-|`-p <watermark scale percents>`    | Declare watermark should be how many percents of image|
+| **Options**                              | **Description**                                       |
+|:-----------------------------------------|:------------------------------------------------------|
+|`-i <main image file path>`               | Script looks for image in given path                  |
+|`-l <watermark file path>`                | Script looks for watermark in given path              |
+|`-p <watermark scale percents>`           | Declare watermark should be how many percents of image|
+|`-r <distance from picture sides>`        | Set watermark distance from picture sides             |
+|`-u <distance from picture up or bottom>` | Set watermark distance from up or bottom              |
 
 *Default path for image and watermark is beside of script and names image.jpg and watermark.png*
 *Default value for watermark scale percents is 6*
+*Default value for distance from sides is 5*
 
 | **Arguments**                     | **Description**                                       |
 |:----------------------------------|:------------------------------------------------------|
@@ -106,8 +109,8 @@ Make sure you have python3 using `python3 --version`
 *Default place for watermark is bottom left*
 
 - Example:
-  - `watermark -i $Home/image.jpg -l channel_logo.png`
-    - *(Watermark file is channel_logo.png and it is in same directory with main.py)*
+  - `watermark -i $Home/image.jpg -l channel-logo.png`
+    - *(Watermark file is channel-logo.png and it is in same directory with main.py)*
   -  `watermark main.py -i image.png right bottom`
   
 ## Bug Report and Feedback

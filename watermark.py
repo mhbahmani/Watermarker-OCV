@@ -40,7 +40,7 @@ for opt, arg in opts:
         print('By defalt, this value is 6%')
         print('You can set logo distance from picture sides using -r')
         print('You can set logo distance from up or bottom using -u')
-        print('Defualt value for these are 5%')
+        print('Default value for these are 5%')
         print('Use top, bottom, left and right key words to declare watermark place')
         print('Watermark palce is by default bottom and left')
         sys.exit()
