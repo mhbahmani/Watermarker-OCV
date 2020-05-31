@@ -27,10 +27,20 @@ except getopt.GetoptError:
 
 for opt, arg in opts:
     if opt == '-h':
-        print('$main.py -i <image path> -l <watermark path> -p <watermark scale percents> [watermark place]')
+        print('$ python main.py')
+        print('Options:')
+        print('-i <image path>')
+        print('-l <watermark path>')
+        print('-p <watermark scale percents>')
+        print('-r <distance from left or right >')
+        print('-u <distance from up or bottom>')
+        print('')
         print('If you don\'t gave image path and watermark, script consume them by default as image.jpg and logo.png')
         print('With -p option, declare logo should be how many percents of the main image')
         print('By defalt, this value is 6%')
+        print('You can set logo distance from picture sides using -r')
+        print('You can set logo distance from up or bottom using -u')
+        print('Defualt value for these are 5%')
         print('Use top, bottom, left and right key words to declare watermark place')
         print('Watermark palce is by default bottom and left')
         sys.exit()
@@ -72,13 +82,6 @@ if logo_file_path is None or logo_file_path is '':
     print('You didn\'t give logo file path. I consume it as logo.png')
     logo_file_path = "logo.png"
 
-print('Details you gave me:')
-print('Main Image: %s' % image_file_path)
-print('Watermark: %s' % logo_file_path)
-print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
-print('----------------------------------------------------------')
-print('Adding watermark to image...')
-
 # Load image and watermark
 img = cv2.imread(image_file_path)
 logo = cv2.imread(logo_file_path)
@@ -92,12 +95,27 @@ width_scale_percent = (height_scale_percent * img_height * logo_width) / (img_wi
 # Calculate new width and height of logo
 logo_width = int(img_width * width_scale_percent  / 100)
 logo_height = int(img_height * height_scale_percent / 100)
-# Resize image
-logo = cv2.resize(logo, (logo_width, logo_height), interpolation = cv2.INTER_AREA)
 
-# Set distance from image sides
+# Calculate distance from image sides
 distance_from_bottom = int(img_height * distance_from_up_bottom_of_picture_percent / 100)
 distance_from_side = int(img_width * distance_from_sides_of_picture_percent / 100)
+
+
+print('Main Image: %s' % image_file_path)
+print('Watermark: %s' % logo_file_path)
+print('Watermark Location: %s %s' % ('Bottom' if bottom else 'Top', 'Left' if left else 'Right'))
+
+print('Watermark distance from %s: %d' % ('bottom' if bottom else 'top', distance_from_bottom))
+print('Watermark distance from %s: %d' % ('left' if left else 'right', distance_from_side))
+print('Image width: %d' % img_width)
+print('Image height: %d' % img_height)
+print('Watermark width: %d' % logo_width)
+print('Watermark height: %d' % logo_height)
+print('----------------------------------------------------------')
+print('Adding watermark to image...')
+
+# Resize image
+logo = cv2.resize(logo, (logo_width, logo_height), interpolation = cv2.INTER_AREA)
 
 # Set logo coordinates
 if bottom:
